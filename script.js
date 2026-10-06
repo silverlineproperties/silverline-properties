@@ -1,1 +1,0 @@
-function filter(){const q=document.getElementById('search').value.toLowerCase(),t=document.getElementById('type').value;let shown=0;document.querySelectorAll('.card').forEach(c=>{const ok=(!q||(c.dataset.name+c.dataset.location).toLowerCase().includes(q))&&(!t||c.dataset.type===t);c.style.display=ok?'block':'none';if(ok)shown++});document.getElementById('empty').hidden=shown!==0}
