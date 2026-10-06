@@ -1,0 +1,3 @@
+const cfg=window.SILVERLINE_CONFIG||{};const configured=cfg.supabaseUrl&&!cfg.supabaseUrl.includes('YOUR_')&&cfg.supabasePublishableKey&&!cfg.supabasePublishableKey.includes('YOUR_');const supabaseClient=configured?window.supabase.createClient(cfg.supabaseUrl,cfg.supabasePublishableKey):null;const logo='';
+async function requireStaff(){if(!supabaseClient)return {ok:false,error:'Supabase is not configured.'};const {data:{user}}=await supabaseClient.auth.getUser();if(!user)return {ok:false,redirect:true};const {data,error}=await supabaseClient.rpc('is_staff');if(error||!data)return {ok:false,redirect:true};return {ok:true,user}}
+async function signOut(){if(supabaseClient)await supabaseClient.auth.signOut();location.href='login.html'}
